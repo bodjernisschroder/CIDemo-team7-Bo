@@ -13,5 +13,14 @@
             if (b == 0) throw new DivideByZeroException("Can't divide by zero.");
             return (double)a / b;
         }
+
+        public double Power(double a, double b) => Math.Pow(a, b);
+
+        public double SquareRoot(double a)
+        {
+            if (a < 0) throw new ArgumentException("Cannot take square root of a negative number.");
+            return Math.Sqrt(a);
+        }
+
     }
 }
