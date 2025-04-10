@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,14 +27,14 @@ jobs:
 
       - name: Test
         run: dotnet test --no-build --verbosity normal
-        
+
       - name: Test with code coverage
-        run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+        run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./TestResults/
 
       - name: Generate coverage report
         uses: danielpalme/ReportGenerator-GitHub-Action@5.1.9
         with:
-          reports: '**/coverage.cobertura.xml'
+          reports: 'TestResults/coverage.cobertura.xml'
           targetdir: 'coveragereport'
           reporttypes: 'HtmlInline;Cobertura'
 
@@ -47,6 +48,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
