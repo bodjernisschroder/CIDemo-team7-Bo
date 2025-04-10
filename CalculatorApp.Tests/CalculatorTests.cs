@@ -104,5 +104,73 @@ namespace CalculatorApp.Tests
         {
             Assert.Throws<ArgumentException>(() => _calc.SquareRoot(input));
         }
+        [Theory]
+        [InlineData(0, 0)]
+        [InlineData(Math.PI / 2, 1)]
+        public void Sin_ReturnsExpectedResult(double input, double expected)
+        {
+            Assert.Equal(expected, _calc.Sin(input), precision: 5);
+        }
+
+        [Theory]
+        [InlineData(0, 1)]
+        [InlineData(Math.PI, -1)]
+        public void Cos_ReturnsExpectedResult(double input, double expected)
+        {
+            Assert.Equal(expected, _calc.Cos(input), precision: 5);
+        }
+
+        [Theory]
+        [InlineData(0, 0)]
+        [InlineData(Math.PI / 4, 1)]
+        public void Tan_ReturnsExpectedResult(double input, double expected)
+        {
+            Assert.Equal(expected, _calc.Tan(input), precision: 5);
+        }
+
+        [Theory]
+        [InlineData(1, 0)]
+        [InlineData(Math.E, 1)]
+        public void Log_ReturnsExpectedResult(double input, double expected)
+        {
+            Assert.Equal(expected, _calc.Log(input), precision: 5);
+        }
+
+        [Fact]
+        public void Log_NegativeNumber_ThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() => _calc.Log(-1));
+        }
+
+        [Theory]
+        [InlineData(0, 1)]
+        [InlineData(5, 120)]
+        public void Factorial_ReturnsExpectedResult(int input, long expected)
+        {
+            Assert.Equal(expected, _calc.Factorial(input));
+        }
+
+        [Fact]
+        public void Factorial_Negative_ThrowsException()
+        {
+            Assert.Throws<ArgumentException>(() => _calc.Factorial(-3));
+        }
+
+        [Theory]
+        [InlineData(Math.PI, 180)]
+        [InlineData(0, 0)]
+        public void RadiansToDegrees_ReturnsExpectedResult(double input, double expected)
+        {
+            Assert.Equal(expected, _calc.RadiansToDegrees(input), precision: 5);
+        }
+
+        [Theory]
+        [InlineData(180, Math.PI)]
+        [InlineData(0, 0)]
+        public void DegreesToRadians_ReturnsExpectedResult(double input, double expected)
+        {
+            Assert.Equal(expected, _calc.DegreesToRadians(input), precision: 5);
+        }
+
     }
 }
